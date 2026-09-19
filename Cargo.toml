@@ -1,0 +1,22 @@
+[package]
+name = "keysnoise"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+gtk = { package = "gtk4", version = "0.9" }
+rodio = "0.19"
+hound = "3.5"
+libc = "0.2"
+
+[profile.release]
+opt-level = 3
+lto = true
+strip = true
+
+[package.metadata.deb]
+depends = "libgtk-4-1, libgstreamer1.0-0, libgstreamer-plugins-base1.0-0"
+assets = [
+    ["target/release/keysnoise", "usr/bin/", "755"],
+    ["assets/**/*", "usr/share/keysnoise/assets/", "644"],
+]
